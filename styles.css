@@ -1,0 +1,275 @@
+/* ─── tokens (verbatim from original) ─────────────────────────────── */
+:root{
+  --sand:#F7F5F0;--sand2:#EEEAE3;--sand3:#E2DDD5;--sand4:#CCC7BC;
+  --ink:#1A1814;--ink2:#5C574F;--ink3:#9B9489;
+  --cream:#FFFCF8;
+  --sage:#3D6B57;--sage2:#EBF2EE;
+  --rust:#C04B2D;--rust2:#FBF0EC;
+  --amber:#C47D1A;--amber2:#FDF5E8;
+  --sky:#2B5F8E;--sky2:#EAF0F7;
+  --border:#E2DDD5;--border2:#CCC7BC;
+  --safe-t:env(safe-area-inset-top,0px);
+  --safe-b:env(safe-area-inset-bottom,0px);
+}
+
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{
+  height:100%;background:var(--sand);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',sans-serif;
+  overflow:hidden;-webkit-font-smoothing:antialiased;
+}
+#root{display:flex;flex-direction:column;height:100%;padding-top:var(--safe-t)}
+
+/* ─── typography ───────────────────────────────────────────────── */
+.t-hero{font-size:32px;font-weight:700;letter-spacing:-0.5px;line-height:1.1}
+.t-title{font-size:20px;font-weight:600;letter-spacing:-0.3px}
+.t-body{font-size:15px;line-height:1.5}
+.t-sm{font-size:13px;color:var(--ink2)}
+.t-xs{font-size:11px;color:var(--ink3);letter-spacing:0.04em;text-transform:uppercase;font-weight:600}
+.mono{font-variant-numeric:tabular-nums;font-feature-settings:'tnum'}
+
+/* ─── layout ──────────────────────────────────────────────────── */
+.scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;background:var(--sand);scroll-behavior:smooth}
+.pad{padding:0 18px}
+
+/* ─── inputs ──────────────────────────────────────────────────── */
+input,select,textarea{
+  display:block;width:100%;background:var(--cream);color:var(--ink);
+  border:1.5px solid var(--border2);border-radius:12px;
+  padding:12px 14px;font-size:16px;font-family:inherit;
+  outline:none;-webkit-appearance:none;appearance:none;
+  transition:border-color 0.15s, box-shadow 0.15s;
+}
+input:focus,select:focus,textarea:focus{
+  border-color:var(--ink2);
+  box-shadow:0 0 0 3px rgba(26,24,20,0.06);
+}
+select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239B9489' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;
+}
+label.field{display:flex;flex-direction:column;gap:6px}
+label.field .fl{font-size:12px;font-weight:600;color:var(--ink2);letter-spacing:0.02em}
+.field-row{display:grid;gap:10px}
+.form-gap{display:flex;flex-direction:column;gap:14px}
+
+/* ─── buttons ─────────────────────────────────────────────────── */
+button{cursor:pointer;font-family:inherit;border:none;-webkit-tap-highlight-color:transparent;transition:all 0.12s}
+.btn{display:flex;align-items:center;justify-content:center;gap:6px;border-radius:12px;font-size:15px;font-weight:600;padding:13px 20px;width:100%}
+.btn-fill{background:var(--ink);color:var(--cream)}
+.btn-fill:active{background:#333;transform:scale(0.98)}
+.btn-ghost{background:var(--sand2);color:var(--ink)}
+.btn-ghost:active{background:var(--sand3);transform:scale(0.98)}
+.btn-sage{background:var(--sage);color:#fff}
+.btn-sage:active{background:#2d5241;transform:scale(0.98)}
+.btn-rust{background:var(--rust);color:#fff}
+.btn-rust:active{opacity:0.85;transform:scale(0.98)}
+.btn-sm{padding:8px 14px;font-size:13px;border-radius:9px;width:auto}
+.btn-icon{
+  width:36px;height:36px;padding:0;border-radius:10px;
+  background:var(--sand2);color:var(--ink2);
+  display:flex;align-items:center;justify-content:center;font-size:18px;
+}
+.btn-icon:active{background:var(--sand3);transform:scale(0.94)}
+
+/* ─── cards ───────────────────────────────────────────────────── */
+.card{background:var(--cream);border:1px solid var(--border);border-radius:18px;padding:18px;margin-bottom:12px}
+.card-flush{background:var(--cream);border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-bottom:12px}
+
+/* ─── row item — title WRAPS up to 2 lines (was: nowrap+ellipsis) */
+.item{display:flex;align-items:center;justify-content:space-between;padding:13px 18px;border-bottom:1px solid var(--border);gap:10px}
+.item:last-child{border-bottom:none}
+.item-left{display:flex;align-items:center;gap:12px;flex:1;min-width:0}
+.item-left > div:not(.check){min-width:0;flex:1}
+.item-right{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.item-title{
+  font-size:15px;font-weight:500;
+  overflow-wrap:anywhere;word-break:break-word;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+  overflow:hidden;line-height:1.3;
+}
+.item-sub{
+  font-size:12px;color:var(--ink3);margin-top:2px;
+  overflow-wrap:anywhere;word-break:break-word;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+  overflow:hidden;line-height:1.35;
+}
+
+/* ─── check circle ────────────────────────────────────────────── */
+.check{
+  width:24px;height:24px;border-radius:50%;border:2px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  cursor:pointer;transition:background 0.18s, border-color 0.18s, transform 0.12s;font-size:13px;
+}
+.check:active{transform:scale(0.9)}
+.check.on{background:var(--sage);border-color:var(--sage);color:#fff}
+
+/* ─── amounts (scale instead of clip) ─────────────────────────── */
+.amt{
+  font-size:14px;font-weight:600;font-variant-numeric:tabular-nums;
+  white-space:nowrap;
+}
+.amt-sage{color:var(--sage)}
+.amt-rust{color:var(--rust)}
+.amt-amber{color:var(--amber)}
+/* Fluid amount cell — shrinks aggressively, never wraps mid-decimal, never clips. */
+.amt-fluid{font-size:clamp(10px, 3vw, 14px);white-space:nowrap;min-width:0}
+
+/* ─── section header ──────────────────────────────────────────── */
+.sec{display:flex;align-items:center;justify-content:space-between;padding:20px 18px 8px}
+.sec-title{font-size:11px;font-weight:700;color:var(--ink3);letter-spacing:0.08em;text-transform:uppercase}
+
+/* ─── progress ────────────────────────────────────────────────── */
+.prog-wrap{height:5px;background:var(--sand3);border-radius:3px;overflow:hidden}
+.prog{height:100%;border-radius:3px;transition:width 0.4s ease}
+
+/* ─── pill ────────────────────────────────────────────────────── */
+.pill{display:inline-block;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;white-space:nowrap}
+.pill-sage{background:var(--sage2);color:var(--sage)}
+.pill-rust{background:var(--rust2);color:var(--rust)}
+.pill-amber{background:var(--amber2);color:var(--amber)}
+.pill-sky{background:var(--sky2);color:var(--sky)}
+
+/* ─── stat grid: wraps + value font scales to fit ─────────────── */
+.stats{display:grid;gap:8px;margin-bottom:16px}
+.stats-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.stats-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.stat{background:var(--sand2);border-radius:14px;padding:12px 14px;min-width:0}
+.stat-l{font-size:11px;font-weight:600;color:var(--ink3);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:4px}
+.stat-v{
+  font-weight:700;font-variant-numeric:tabular-nums;
+  /* Aggressive shrink so even 6-figure amounts fit on a 360px screen
+     without wrapping mid-decimal. No clipping. */
+  font-size:clamp(10px, 3.4vw, 17px);
+  line-height:1.15;
+  white-space:nowrap;
+  min-width:0;
+}
+
+/* ─── header ──────────────────────────────────────────────────── */
+#hdr{
+  padding:12px 18px 10px;background:var(--sand);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:10;gap:10px;
+}
+#hdr > div:first-child{min-width:0;flex:1}
+.hdr-month{
+  font-size:12px;font-weight:700;color:var(--ink3);
+  letter-spacing:0.05em;text-transform:uppercase;margin-bottom:1px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.hdr-title{font-size:19px;font-weight:700;letter-spacing:-0.3px}
+.month-btn{
+  background:var(--sand2);color:var(--ink2);border:1px solid var(--border);
+  border-radius:10px;padding:7px 12px;font-size:13px;font-weight:600;
+  cursor:pointer;display:flex;align-items:center;gap:5px;flex-shrink:0;
+  transition:background 0.15s, transform 0.1s;
+}
+.month-btn:active{background:var(--sand3);transform:scale(0.97)}
+
+/* ─── tab bar ─────────────────────────────────────────────────── */
+#tabs{
+  background:var(--cream);border-top:1px solid var(--border);
+  display:flex;padding-bottom:var(--safe-b);
+  padding-bottom:max(var(--safe-b),0px);
+}
+.tab{
+  flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;
+  padding:9px 4px 10px;background:transparent;border:none;border-radius:0;
+  font-size:10px;font-weight:600;color:var(--ink3);letter-spacing:0.02em;cursor:pointer;
+  transition:color 0.15s;
+}
+.tab.on{color:var(--ink)}
+.tab svg{width:22px;height:22px;stroke-width:1.8}
+.tab-dot{width:5px;height:5px;border-radius:50%;background:transparent;margin-bottom:1px;transition:background 0.18s}
+.tab.on .tab-dot{background:var(--ink)}
+
+/* ─── modal / sheet ───────────────────────────────────────────── */
+.overlay{
+  position:fixed;inset:0;background:rgba(26,24,20,0.5);z-index:100;
+  display:flex;align-items:flex-end;padding-bottom:var(--safe-b);
+  animation:fadeIn 0.18s ease;
+}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.sheet{
+  background:var(--cream);border-radius:24px 24px 0 0;
+  width:100%;max-height:92vh;overflow-y:auto;padding:0 20px 32px;
+  transform:translateY(100%);transition:transform 0.28s cubic-bezier(0.4,0,0.2,1);
+}
+.sheet.open{transform:translateY(0)}
+.sheet-handle{width:40px;height:4px;background:var(--sand3);border-radius:2px;margin:12px auto 22px}
+.sheet-title{font-size:20px;font-weight:700;letter-spacing:-0.3px;margin-bottom:20px}
+
+/* ─── empty state ─────────────────────────────────────────────── */
+.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4rem 2rem;text-align:center;gap:12px}
+.empty-icon{font-size:40px;margin-bottom:4px}
+.empty-title{font-size:18px;font-weight:700}
+.empty-sub{font-size:14px;color:var(--ink2);line-height:1.5}
+
+/* ─── install banner ──────────────────────────────────────────── */
+.install{background:var(--sky2);border:1px solid rgba(43,95,142,0.2);border-radius:14px;padding:14px 16px;margin-bottom:14px;display:flex;gap:12px;align-items:flex-start}
+.install-ico{width:38px;height:38px;background:var(--sky);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+/* ─── divider ─────────────────────────────────────────────────── */
+.divider{height:1px;background:var(--border);margin:4px 0}
+
+/* ─── new budget prompt ───────────────────────────────────────── */
+.new-budget{background:var(--cream);border:1.5px dashed var(--border2);border-radius:18px;padding:28px 20px;text-align:center;margin-bottom:16px}
+
+/* ─── template card ───────────────────────────────────────────── */
+.tpl-card{
+  background:var(--cream);border:1.5px solid var(--border2);border-radius:16px;
+  padding:16px;margin-bottom:10px;cursor:pointer;
+  transition:border-color 0.15s, background 0.15s, transform 0.12s;
+}
+.tpl-card:active{background:var(--sand2);border-color:var(--ink);transform:scale(0.99)}
+.tpl-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;gap:8px}
+.tpl-card-name{font-size:16px;font-weight:700;min-width:0;overflow-wrap:anywhere}
+.tpl-card-meta{font-size:12px;color:var(--ink3);line-height:1.6}
+
+/* ─── toggle ──────────────────────────────────────────────────── */
+.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:4px 0;gap:12px}
+.toggle-row > span{flex:1;min-width:0}
+.toggle-wrap{width:44px;height:26px;border-radius:13px;background:var(--sand3);cursor:pointer;position:relative;transition:background 0.2s;flex-shrink:0}
+.toggle-wrap.on{background:var(--sage)}
+.toggle-thumb{position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:transform 0.2s;box-shadow:0 1px 3px rgba(0,0,0,0.2)}
+.toggle-wrap.on .toggle-thumb{transform:translateX(18px)}
+
+/* ─── net worth snapshot ──────────────────────────────────────── */
+.snap{background:var(--cream);border:1px solid var(--border);border-radius:16px;padding:16px;margin-bottom:10px}
+.snap-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px 16px;margin-top:10px}
+.snap-row{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--border);gap:8px;min-width:0}
+.snap-row > span:first-child{min-width:0;overflow-wrap:anywhere}
+.snap-row:last-child{border-bottom:none}
+
+/* ─── period picker row ───────────────────────────────────────── */
+.period-row{
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--sand2);color:var(--ink);border-radius:12px;
+  padding:13px 16px;margin-bottom:8px;cursor:pointer;gap:10px;
+  transition:background 0.15s, transform 0.1s;border:1px solid transparent;
+}
+.period-row:active{background:var(--sand3);transform:scale(0.99)}
+.period-row.active{background:var(--sage2);border-color:rgba(61,107,87,0.25)}
+.period-row .pr-main{min-width:0;flex:1}
+.period-row .pr-label{font-size:15px;font-weight:600;overflow-wrap:anywhere}
+.period-row .pr-range{font-size:12px;color:var(--ink2);margin-top:2px}
+
+/* ─── focus visibility (accessibility) ────────────────────────── */
+button:focus-visible,.check:focus-visible,.toggle-wrap:focus-visible,.tab:focus-visible{
+  outline:2px solid var(--ink);outline-offset:2px;border-radius:10px;
+}
+
+/* ─── narrow viewport tightening ──────────────────────────────── */
+@media (max-width:360px){
+  .item{padding:11px 14px}
+  .stat{padding:10px 12px}
+  .pad,.card{padding:12px}
+  .card{padding:16px 14px}
+  .stat-l{font-size:10px}
+  .item-right .btn-icon{width:28px;height:28px;font-size:13px}
+  .amt{font-size:13px}
+  #hdr{padding:10px 14px 8px}
+  .hdr-title{font-size:17px}
+}
