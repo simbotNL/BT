@@ -1,0 +1,21 @@
+{
+  "name": "gstack",
+  "version": "1.56.1.0",
+  "description": "gstack — Garry Tan's Claude Code skill pack. 53 slash-command skills covering planning, design, engineering review, QA, ship, security, and post-deploy monitoring.",
+  "author": {
+    "name": "Garry Tan",
+    "url": "https://github.com/garrytan"
+  },
+  "homepage": "https://github.com/garrytan/gstack",
+  "repository": "https://github.com/garrytan/gstack",
+  "license": "MIT",
+  "keywords": [
+    "gstack",
+    "skills",
+    "code-review",
+    "qa",
+    "ship",
+    "design",
+    "browser-automation"
+  ]
+}
